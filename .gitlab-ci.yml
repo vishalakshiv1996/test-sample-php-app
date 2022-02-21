@@ -1,0 +1,33 @@
+stages:
+  - version
+  - build
+  - test
+
+version:
+  stage: version
+  script:
+    - VERSION=${BUILD_VERSION%%-*}
+    - |
+      if [ "VERSION" != "" ]
+      then
+        sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"Sdk-Ris-PHP-0710-${VERSION}\"/g' test_sample_php_app/settings.ini
+      fi
+
+build:
+  stage: build
+  image: roadiz/php73-runner
+  rules:
+    - !reference [.rule-on-master]
+    - !reference [.rule-on-mr]
+  before_script:
+    # install dependencies
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - bash docker_install.sh
+    - apt-get update
+    - apt-get install zip unzip -y
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - php composer.phar install
+  script:
+    - composer install
