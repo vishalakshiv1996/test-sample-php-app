@@ -12,10 +12,7 @@ version:
   script:
     - apk --update --no-cache add git
     - BUILD_VERSION=$(git describe --tags) || true
-    - echo BUILD_VERSION=${BUILD_VERSION:-"0.0.0-${CI_COMMIT_SHORT_SHA}"} | tee version.env
-  artifacts:
-    reports:
-      dotenv: version.env
+    - echo BUILD_VERSION=${BUILD_VERSION:-"0.0.0-${CI_COMMIT_SHORT_SHA}"}
   only:
     - tags
 
