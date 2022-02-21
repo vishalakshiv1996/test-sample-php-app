@@ -1,5 +1,5 @@
 {
-  "name": "test-sample-php-app",
+  "name": "test/test-sample-php-app",
   "description": "PHP client for Kount Risk Inquiry Service.",
   "type": "library",
   "license": "proprietary",
