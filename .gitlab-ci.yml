@@ -24,7 +24,7 @@ version_update:
     - |
       if [ "VERSION" != "" ]
       then
-        sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"Sdk-Ris-PHP-0710-${VERSION}\"/g' test_sample_php_app/settings.ini
+        sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"Sdk-Ris-PHP-0710-${VERSION}\"/g' settings.ini
       fi
   only:
     - tags
