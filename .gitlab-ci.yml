@@ -3,11 +3,24 @@ variables:
 
 stages:
   - version
+  - version_update
   - stage1
   - stage2
 
 version:
   stage: version
+  script:
+    - apk --update --no-cache add git
+    - BUILD_VERSION=$(git describe --tags) || true
+    - echo BUILD_VERSION=${BUILD_VERSION:-"0.0.0-${CI_COMMIT_SHORT_SHA}"} | tee version.env
+  artifacts:
+    reports:
+      dotenv: version.env
+  only:
+    - tags
+
+version_update:
+  stage: version_update
   script:
     - VERSION=${BUILD_VERSION%%-*}
     - |
@@ -15,6 +28,8 @@ version:
       then
         sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"Sdk-Ris-PHP-0710-${VERSION}\"/g' test_sample_php_app/settings.ini
       fi
+  only:
+    - tags
 
 build:
   stage: stage1
