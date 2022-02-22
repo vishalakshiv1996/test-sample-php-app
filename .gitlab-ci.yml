@@ -18,6 +18,7 @@ version:
       if [ "${BUILD_VERSION:-"0.0.0-${CI_COMMIT_SHORT_SHA}"}" != "" ]
       then
         echo "true"
+        git checkout main
         sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"test-sample-PHP-0710-${BUILD_VERSION}\"/g' settings.ini
         cat settings.ini
         git config --global user.email "vishalakshi.v1234@gmailcom"
@@ -25,7 +26,7 @@ version:
         git status
         git add settings.ini
         git commit -m "updated sdk version"
-        git push origin HEAD:<main>
+        git push origin main
       fi
 
 build:
