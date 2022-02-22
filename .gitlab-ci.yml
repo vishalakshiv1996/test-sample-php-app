@@ -14,16 +14,10 @@ version:
     - apt-get install git -y
     - BUILD_VERSION=$(git describe --tags) || true
     - echo BUILD_VERSION=${BUILD_VERSION:-"0.0.0-${CI_COMMIT_SHORT_SHA}"}
-
-version_update:
-  stage: version_update
-  script:
-    - VERSION=${BUILD_VERSION%%-*}
-    - echo ${VERSION}
     - |
-      if [ "${VERSION}" != "" ]
+      if [ "${BUILD_VERSION%%-*}" != "" ]
       then
-        sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"Sdk-Ris-PHP-0710-${VERSION}\"/g' settings.ini
+        sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"test-sample-PHP-0710-${BUILD_VERSION%%-*}\"/g' settings.ini
       fi
 
 build:
