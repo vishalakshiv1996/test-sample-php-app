@@ -18,9 +18,12 @@ version:
       if [ "${BUILD_VERSION:-"0.0.0-${CI_COMMIT_SHORT_SHA}"}" != "" ]
       then
         echo "true"
-        sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"test-sample-PHP-0710-${BUILD_VERSION:-"0.0.0-${CI_COMMIT_SHORT_SHA}"}\"/g' settings.ini
+        sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"test-sample-PHP-0710-${BUILD_VERSION}\"/g' settings.ini
         cat settings.ini
         git status
+        git add settings.ini
+        git commit -m "updated sdk version"
+        git push origin main
       fi
 
 build:
