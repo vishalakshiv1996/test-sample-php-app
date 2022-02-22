@@ -21,7 +21,7 @@ version_update:
     - VERSION=${BUILD_VERSION%%-*}
     - echo ${VERSION}
     - |
-      if [ ${VERSION} != "" ]
+      if [ "${VERSION}" != "" ]
       then
         sed -i -e 's/SDK_VERSION=0.0.0/SDK_VERSION=\"Sdk-Ris-PHP-0710-${VERSION}\"/g' settings.ini
       fi
