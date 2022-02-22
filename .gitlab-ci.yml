@@ -26,7 +26,7 @@ version:
         git status
         git add settings.ini
         git commit -m "updated sdk version"
-        git push origin main
+        git push https://vishalakshi.v1234@gmail.com:glpat-KT5Mgyd-6e4aGyhCM6xL@gitlab.com/test-group838/test_sample_php_app.git HEAD:main
       fi
 
 build:
