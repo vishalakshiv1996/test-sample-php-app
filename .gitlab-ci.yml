@@ -25,7 +25,7 @@ version:
         git status
         git add settings.ini
         git commit -m "updated sdk version"
-        git push origin main
+        git push
       fi
 
 build:
