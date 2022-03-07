@@ -4,8 +4,6 @@ variables:
 stages:
   - version
   - version_update
-  - stage1
-  - stage2
 
 version:
   stage: version
@@ -26,14 +24,22 @@ version:
       fi
 
 build:
-  stage: stage1
+  stage: build
+  image: roadiz/php73-runner
+  before_script:
+    # install dependencies
+    - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+    - bash docker_install.sh
+    - apt-get update
+    - apt-get install zip unzip -y
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - php composer.phar install
   script:
-    - echo "We are currently in stage 1"
-    - echo "These are the contents of test.py"
-    - echo $example
-
+    - composer install
+    
 test:
-  stage: stage2
+stage: test
   script:
-    - echo "We are currently in stage 2"
-    - echo "running python script"
+    - vendor/bin/phpunit
