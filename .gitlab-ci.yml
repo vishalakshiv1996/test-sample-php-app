@@ -1,9 +1,7 @@
-variables:
-  example: this is an example variable
-
 stages:
   - version
-  - version_update
+  - build
+  - test
 
 version:
   stage: version
