@@ -13,13 +13,6 @@ version:
     - BUILD_VERSION=`echo $BUILD_VERSION | cut -c-17`
     - SDK_VERSION="Sdk-Ris-PHP-"${BUILD_VERSION}
     - echo ${SDK_VERSION}
-    - |
-      if [ "$(grep -q 'SDK_VERSION=\"${SDK_VERSION}\"' settings.ini)" != "0" ]
-      then
-        echo "'SDK_VERSION=${SDK_VERSION}' not found"
-        echo "Change SDK_VERSION to 'Sdk-Ris-PHP-next_expected_tag' in settings.ini"
-        exit 1
-      fi
 
 build:
   stage: build
