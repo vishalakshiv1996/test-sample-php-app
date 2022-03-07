@@ -40,6 +40,6 @@ build:
     - composer install
     
 test:
-stage: test
+  stage: test
   script:
     - vendor/bin/phpunit
