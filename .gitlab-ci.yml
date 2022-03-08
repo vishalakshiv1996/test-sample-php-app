@@ -37,4 +37,4 @@ test:
   stage: test
   extends: .php
   script:
-    - phpunit
+    - phpunit --version
