@@ -14,8 +14,7 @@ version:
     - SDK_VERSION="Sdk-Ris-PHP-"${BUILD_VERSION}
     - echo ${SDK_VERSION}
 
-build:
-  stage: build
+.php:
   image: roadiz/php73-runner
   before_script:
     # install dependencies
@@ -29,8 +28,13 @@ build:
     - php composer.phar install
   script:
     - composer install
-    
+
+build:
+  stage: build
+  extends: .php
+  
 test:
   stage: test
+  extends: .php
   script:
     - vendor/bin/phpunit
